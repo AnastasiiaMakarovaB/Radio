@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 public class RadioTest {
 
-    // --- ТЕСТЫ РАДИОСТАНЦИЙ ---
+    // тесты для радо по умолчанию (10 станций)
 
     @Test
     public void shouldSetValidStation() {
@@ -115,5 +115,40 @@ public class RadioTest {
         radio.setCurrentVolume(0);
         radio.decreaseVolume();
         Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
+    // Тесты для кастомного радио (30 станций)
+
+    @Test
+
+    public void shouldSetValidStationForCustomStationsCount() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(29);
+        Assertions.assertEquals(29, radio.getCurrentStation());
+
+
+    }
+
+    @Test
+    public void shouldNotSetValidStationForCustomStationsCount() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(30);
+        Assertions.assertEquals(0, radio.getCurrentStation());
+
+    }
+
+    @Test
+    public void shouldMoveToCustomNextStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(29);
+        radio.next();
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldMoveToCustomPrevStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(0);
+        radio.prev();
+        Assertions.assertEquals(29, radio.getCurrentStation());
     }
 }
